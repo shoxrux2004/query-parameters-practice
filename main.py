@@ -1,5 +1,5 @@
 import requests
-
+from pprint import pprint
 
 class RandomUser:
     def __init__(self) -> None:
@@ -15,7 +15,14 @@ class RandomUser:
         Returns:
             list: lsit of users
         '''
-        pass
+        parametrs={
+            "results":n
+        }
+        responce=requests.get(self.url,params=parametrs)
+        a=responce.json()
+        return a
+
+        
     
     def get_user_by_gender(self, gender: str) -> dict:
         '''return specify whether only male or only female users generated.\
@@ -27,7 +34,12 @@ class RandomUser:
         Returns:
             str: user
         '''
-        pass
+        parametrs={
+            "gender":gender
+        }
+        responce=requests.get(self.url,params=parametrs)
+        a=responce.json()
+        return a["results"][0]["gender"]
     
     def get_users_by_gender(self, n: int, gender: str) -> dict:
         '''return specify whether only male or only female users generated.\
@@ -40,7 +52,13 @@ class RandomUser:
         Returns:
             str: user
         '''
-        pass
+        parametrs={
+            "results":n,
+            "gender":gender
+        }
+        responce=requests.get(self.url,params=parametrs)
+        a=responce.json()
+        return a["results"][0]["gender"]
     
     def get_user_by_nat(self, nat: str) -> dict:
         '''get user nationality from randomuser
@@ -51,7 +69,12 @@ class RandomUser:
         Returns:
             str: user
         '''
-        pass
+        parametrs={
+            "nat":nat
+        }
+        responce=requests.get(self.url,params=parametrs)
+        a=responce.json()
+        return a["results"][0]["nat"]
     
     def get_users_by_nat(self, n: int, nat: str) -> dict:
         '''get user nationality from randomuser
@@ -63,7 +86,11 @@ class RandomUser:
         Returns:
             str: user
         '''
-        pass
+        parametrs={
+            "results":1
+        }
+        responce=requests.get(self.url,params=parametrs)
+        return responce.json()
     
     def get_specific_field(self, field: str) -> dict:
         '''get user specific field from randomuser
@@ -77,7 +104,12 @@ class RandomUser:
         Returns:
             dict: data
         '''
-        pass
+        parametrs={
+            "field":field
+        }
+        responce=requests.get(self.url,params=parametrs)
+        a=responce.json()
+        return a["results"][0]["location"]
     
     def get_users_specific_field(self, n: int, field: str) -> list:
         '''get user specific field from randomuser
@@ -92,4 +124,13 @@ class RandomUser:
         Returns:
             lsit: list of user data
         '''
-        pass
+        parametrs={
+            "results":n,
+            "field":field
+        }
+        responce=requests.get(self.url,params=parametrs)
+        a=responce.json()
+        return a["results"][0]["location"]
+
+o=RandomUser()
+pprint(o.get_users_specific_field(2,""))
